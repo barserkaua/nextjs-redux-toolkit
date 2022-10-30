@@ -12,43 +12,22 @@ export const userSlice = createSlice({
       state,
       action: PayloadAction<{ data: IUser[]; filter: IFilter }>
     ) => {
-      // it's not a good decision to filter data in state, filter and search have to be on server side
-      if (
-        action.payload.filter.country === "" &&
-        action.payload.filter.gender === "" &&
-        action.payload.filter?.search === ""
-      ) {
-        return action.payload.data;
-      } else if (
-        action.payload.filter?.gender !== "" &&
-        action.payload.filter?.country === ""
-      ) {
-        return action.payload.data.filter(
-          (item) => item.gender === action.payload.filter?.gender
-        );
-      } else if (
-        action.payload.filter?.country !== "" &&
-        action.payload.filter?.gender === ""
-      ) {
-        return action.payload.data.filter(
-          (item) => item.location.country === action.payload.filter?.country
-        );
-      } else if (
-        action.payload.filter?.gender !== "" &&
-        action.payload.filter?.country !== ""
-      ) {
-        return state
-          .filter((item) => item.gender === action.payload.filter?.gender)
-          .filter(
-            (item) => item.location.country === action.payload.filter?.country
-          );
-      } else if (action.payload.filter?.search !== "") {
-        return state.filter((item) =>
+      return action.payload.data
+        .filter((item) =>
+          action.payload.filter?.gender !== ""
+            ? action.payload.filter?.gender === item.gender
+            : item
+        )
+        .filter((item) =>
+          action.payload.filter?.country !== ""
+            ? action.payload.filter?.country === item.location.country
+            : item
+        )
+        .filter((item) =>
           (item.name.first + item.name.last)
             .toLowerCase()
             .includes(action.payload.filter?.search.toLowerCase())
         );
-      }
     },
     sortByFirstName: (state) => {
       return state.sort((firstItem, secondItem) => {

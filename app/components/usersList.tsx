@@ -15,7 +15,7 @@ import { Search } from "./search";
 import { Select } from "./select";
 
 export const UsersList = () => {
-  const { data, isLoading, isError } = useGetUsersQuery(200);
+  const { data, isLoading, isError } = useGetUsersQuery(16);
   const { getUsers, sortByFirstName, sortByLastName } = useActions();
   const { users } = useTypedSelector((state) => state);
 
