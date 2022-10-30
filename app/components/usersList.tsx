@@ -72,7 +72,7 @@ export const UsersList = () => {
         <div className="text-red">Error...</div>
       ) : (
         <div>
-          <div className="my-10 flex justify-around">
+          <div className="my-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Search handleSearchChange={setSearch} />
             <Select
               headerText="Select an option to sort users"
@@ -91,7 +91,7 @@ export const UsersList = () => {
             />
           </div>
 
-          <ul className="grid grid-cols-4 place-items-center gap-4">
+          <ul className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* index is not a good decision in real project, but in this case is better option then id.valueб 
               because id.value have a lot of null value, and it's create some colision
             */}
@@ -113,11 +113,11 @@ export const UsersList = () => {
                         className="mx-2 rounded-full"
                       />
                     </div>
-                    <div className="flex-1 px-3">
-                      <p className="break-words text-sm font-medium text-gray-900">
+                    <div className="flex-1 break-words px-3">
+                      <p className="text-sm font-medium text-gray-900">
                         {user.name.first} {user.name.last}
                       </p>
-                      <p className="break-words text-sm text-gray-500">
+                      <p className="break-all text-sm text-gray-500">
                         {user.email}
                       </p>
                     </div>
